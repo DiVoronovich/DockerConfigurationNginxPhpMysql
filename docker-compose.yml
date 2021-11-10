@@ -1,12 +1,18 @@
 version: '3'
 services:
   php:
+    build:
+      context: .
+      dockerfile: ./docker/php/Dockerfile
     image: php:7.4-fpm
     container_name: php
     volumes:
       - './src:/var/www/html'
 
   nginx:
+    build:
+      context: .
+      dockerfile: ./docker/nginx/Dockerfile
     image: nginx:latest
     ports:
       - 80:80
@@ -14,6 +20,8 @@ services:
     volumes:
       - './src:/var/www/html'
       - './docker/nginx/conf.d:/etc/nginx/conf.d'
+    depends_on:
+      - php
 
   mysql:
     image: mysql:8
