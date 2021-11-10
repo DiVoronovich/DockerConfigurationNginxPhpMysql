@@ -5,6 +5,11 @@ services:
 
   nginx:
     image: nginx:latest
+    ports:
+      - 80:80
+      - 443:443
 
   mysql:
     image: mysql:8
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
