@@ -2,12 +2,15 @@ FROM php:7.4-fpm
 
 WORKDIR /var/www/html
 
-RUN apk update && apk add \
-    build-base \
-    vim
+#install latest version of composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer.phar
 
-RUN docker-php-ext-install pdo_mysql
+RUN docker-php-ext-install pdo pdo_mysql
 
-EXPOSE 9000
+#RUN pecl install -o -f xdebug \
+#    && docker-php-ext-enable xdebug
 
-CMD ["php-fpm"]
+RUN pecl install -o -f xdebug-2.9.6 && docker-php-ext-enable xdebug
+
+
+ADD etc/xdebug3.ini $PHP_INI_DIR/conf.d/zz-xdebug.ini
