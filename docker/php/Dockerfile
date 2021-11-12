@@ -13,4 +13,4 @@ RUN docker-php-ext-install pdo pdo_mysql
 RUN pecl install -o -f xdebug-2.9.6 && docker-php-ext-enable xdebug
 
 
-ADD etc/xdebug3.ini $PHP_INI_DIR/conf.d/zz-xdebug.ini
+ADD etc/xdebug2.ini $PHP_INI_DIR/conf.d/zz-xdebug.ini
