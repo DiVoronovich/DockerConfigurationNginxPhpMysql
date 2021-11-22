@@ -21,8 +21,9 @@ services:
       - './docker/nginx/conf.d:/etc/nginx/conf.d'
 
   mysql:
-    image: mysql:8
+    build:
+      context: ./docker/mysql/
     environment:
       - MYSQL_ROOT_PASSWORD=root
-#    volumes:
-#      - '.'
+    volumes:
+      - ./docker/volume/mysql:/var/lib/mysql
